@@ -1,0 +1,33 @@
+{
+  "name": "real_brave_test_task",
+  "version": "1.0.0",
+  "description": "brave developers test task",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mattakushii/brave_test_task.git"
+  },
+  "keywords": [
+    "Test_task",
+    "Brave_developers",
+    "Next.js",
+    "ReactHooks"
+  ],
+  "author": "Vakhtel Maksim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mattakushii/brave_test_task/issues"
+  },
+  "homepage": "https://github.com/Mattakushii/brave_test_task#readme",
+  "dependencies": {
+    "next": "^9.5.5",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "styled-components": "^5.2.0"
+  }
+}
