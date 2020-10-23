@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "operatorName": "Megafon",
+    "operatorLink": "megafon",
+    "imgUrl": "logos/megafon.png",
+    "slogan": "ya mega fon"
+  },
+  {
+    "id": "2",
+    "operatorName": "Beeline",
+    "operatorLink": "beeline",
+    "imgUrl": "/logos/beeline.png",
+    "slogan": "ya bee line"
+  },
+  {
+    "id": "3",
+    "operatorName": "Mts",
+    "operatorLink": "mts",
+    "imgUrl": "/logos/mts.png",
+    "slogan": "ya M T S"
+  }
+]
