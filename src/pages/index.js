@@ -1,5 +1,4 @@
 import OperatorsList from "../components/operatorsListComponent/OperatorsList"
-import db from "../../public/db.json";
 
 const MainPage = ({data}) => {
 
@@ -11,8 +10,9 @@ const MainPage = ({data}) => {
 }
 
 MainPage.getInitialProps = async () => {
-    const res = db;
-    return {data: res}
+    const res = await fetch('http://localhost:3000/api/operators');
+    const data = await  res.json();
+    return {data: data}
 }
 
 

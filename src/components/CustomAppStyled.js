@@ -6,8 +6,7 @@ import styled from 'styled-components'
         background-color: #f5f5f5;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
+        justify-content: center;
     `;
 
     export const MainContainer = styled.main`
@@ -16,5 +15,7 @@ import styled from 'styled-components'
         display: flex;
         justify-content: center;
         align-items: center;
+
+       
     `;
 

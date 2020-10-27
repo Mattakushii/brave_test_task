@@ -1,16 +1,24 @@
 import {useRouter} from 'next/router'
+import Payment from '../../components/paymentScreen/Payment';
 
 
-const PaymentPage = () => {
-    const router = useRouter();
-    const { payOperatorID } = router.query;
+const PaymentPage = ({data}) => {
+
+    console.log({...data});
+
     return (
-        <div>
-            <h1>
-                {payOperatorID}
-            </h1>
-        </div>
+        <>
+            <Payment
+                data = {{...data}}
+            />
+        </>
     )
+}
+
+PaymentPage.getInitialProps = async (ctx) => {
+    const res = await fetch(`http://localhost:3000/api/operators/${ctx.query.payOperatorID}`);
+    const data = await res.json();
+    return { data }
 }
 
 export default PaymentPage
