@@ -9,7 +9,7 @@ export default function personHandler({ query: { operatorLink } }, res) {
     }, 500)  
   } else {
     setTimeout(()=> {
-      res.status(404).json({ message: `Operator with name: ${operatorLink} not found.` })
+      res.status(404).json({ errMessage: `Operator with name "${operatorLink}" not found.` })
     }, 500)
   }
 }

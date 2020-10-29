@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
     export const OperatorImg = styled.img`
         width: 150px;

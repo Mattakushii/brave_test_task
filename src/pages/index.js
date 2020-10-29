@@ -1,11 +1,28 @@
-import OperatorsList from "../components/operatorsListComponent/OperatorsList"
+import React, { useState, useContext} from 'react'
+import {Context} from '../Context' 
+import { TileContainer } from "../components/OperatorsListStyled";
+import OperatorTile from "../components/operatorTileComponent/OperatorTile";
 
 const MainPage = ({data}) => {
+    //исправить все стили
+    const [operatorsList, setOperatorsList] = useState(data);
 
     return (
-        <>
-            <OperatorsList dataList={data}/>
-        </>
+            <TileContainer>
+                {
+                operatorsList.map((operator)=> {
+                    return (
+                        <OperatorTile
+                            key={operator.id}
+                            id={operator.id}
+                            name={operator.operatorName}
+                            link={operator.operatorLink}
+                            imgUrl={operator.imgUrl}
+                        />
+                    )
+                })
+                }
+        </TileContainer>
     )
 }
 
@@ -14,6 +31,5 @@ MainPage.getInitialProps = async () => {
     const data = await  res.json();
     return {data: data}
 }
-
 
 export default MainPage

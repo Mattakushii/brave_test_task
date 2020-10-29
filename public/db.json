@@ -3,21 +3,53 @@
     "id": "1",
     "operatorName": "Megafon",
     "operatorLink": "megafon",
-    "imgUrl": "logos/megafon.png",
-    "slogan": "ya mega fon"
+    "imgUrl": "logos/megafon.png"
   },
   {
     "id": "2",
     "operatorName": "Beeline",
     "operatorLink": "beeline",
-    "imgUrl": "/logos/beeline.png",
-    "slogan": "ya bee line"
+    "imgUrl": "/logos/beeline.png"
   },
   {
     "id": "3",
     "operatorName": "Mts",
     "operatorLink": "mts",
-    "imgUrl": "/logos/mts.png",
-    "slogan": "ya M T S"
+    "imgUrl": "/logos/mts.png"
+  },
+  {
+    "id": "4",
+    "operatorName": "Yota",
+    "operatorLink": "yota"
+  },
+  {
+    "id": "5",
+    "operatorName": "СберМобайл",
+    "operatorLink": "sbermobile"
+  },
+  {
+    "id": "6",
+    "operatorName": "Mts",
+    "operatorLink": "mts"
+  },
+  {
+    "id": "7",
+    "operatorName": "Tele2",
+    "operatorLink": "tele2"
+  },
+  {
+    "id": "8",
+    "operatorName": "Beeline",
+    "operatorLink": "beeline"
+  },
+  {
+    "id": "9",
+    "operatorName": "Mts",
+    "operatorLink": "mts"
+  },
+  {
+    "id": "10",
+    "operatorName": "Mts",
+    "operatorLink": "mts"
   }
 ]

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import styled, { keyframes } from 'styled-components';","map":{"version":3,"sources":["C:/GitHub/brave_test_task/src/components/PaymentPageStyled.js"],"names":["styled","keyframes"],"mappings":"AAAA,OAAOA,MAAP,IAAgBC,SAAhB,QAAgC,mBAAhC","sourcesContent":["import styled, {keyframes} from 'styled-components'\r\n\r\n"]},"metadata":{},"sourceType":"module"}

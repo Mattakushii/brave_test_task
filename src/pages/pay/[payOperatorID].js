@@ -1,18 +1,30 @@
-import {useRouter} from 'next/router'
-import Payment from '../../components/paymentScreen/Payment';
+import {PaymentContainer} from '../../components/PaymentPageStyled'
+import InputMask from "react-input-mask";
 
 
 const PaymentPage = ({data}) => {
 
-    console.log({...data});
-
-    return (
-        <>
-            <Payment
-                data = {{...data}}
-            />
-        </>
-    )
+    //написать валидацию для полей
+    if(data && data.id) {
+        return (
+            <PaymentContainer>  
+                <h1>Оплата {data.operatorName}</h1>    
+                <form method="POST" action="">
+                    <div>
+                        <label htmlFor="phone">Номер телефона</label>
+                        <InputMask mask='+7(999)999-99-99' id="phone" type="text"></InputMask>
+                    </div>
+                    <div>
+                        <label htmlFor="payment">Сумма платежа</label>
+                        <input id="payment" type="text"></input>    
+                    </div>
+                    <button onClick={()=> {}}>go</button>
+                </form>
+            </PaymentContainer>
+        )
+    } else {
+    return <h1>{data.errMessage}</h1>
+    }
 }
 
 PaymentPage.getInitialProps = async (ctx) => {
