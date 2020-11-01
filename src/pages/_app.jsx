@@ -5,7 +5,7 @@ import Header from "../components/headerComponent/Header";
 import Footer from "../components/footerComponent/Footer";
 
 import { createGlobalStyle } from 'styled-components';
-import { AppContainer, MainContainer, Background } from '../components/CustomAppStyled';
+import { AppContainer, MainContainer} from '../components/CustomAppStyled';
 
 
 const GlobalStyle = createGlobalStyle`
