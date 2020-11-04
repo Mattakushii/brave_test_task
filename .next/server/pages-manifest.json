@@ -2,5 +2,10 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/pay/[payOperatorID]": "pages/pay/[payOperatorID].js"
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
+  "/api/operators": "pages/api/operators.js",
+  "/pay/[payOperatorID]": "pages/pay/[payOperatorID].js",
+  "/api/operators/[operatorLink]": "pages/api/operators/[operatorLink].js",
+  "/api/pay": "pages/api/pay.js",
+  "/": "pages/index.js"
 }
