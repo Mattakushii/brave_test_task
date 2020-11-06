@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {SETTINGS} from '../SETTINGS';
 import { TileContainer, ScrollBarContainer, Scrollbar } from "../components/OperatorsListStyled";
 import OperatorTile from "../components/operatorTileComponent/OperatorTile";
 
@@ -40,7 +41,7 @@ export interface OperatorsList {
 }
 
 MainPage.getInitialProps = async () => {
-    const res = await fetch('http://localhost:3000/api/operators');
+    const res = await fetch(`http://${SETTINGS.URL}/api/operators`);
     const data : Array<OperatorsList> | undefined  = await  res.json();
     return {data: data}
 }

@@ -1,9 +1,5 @@
 import styled from 'styled-components'
 
-interface Props {
-    readonly visible  : boolean;
-};
-
 export const AppContainer = styled.div`
     height: 100vh;
     width: 100%;
@@ -21,16 +17,4 @@ export const MainContainer = styled.main`
    display: flex;
    justify-content: center;
 `;
-
-export const BackgroundPopup = styled.div<Props>`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0,0,0, 0.5);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    display: ${props => props.visible ? "block" : "none"};
-`;
-
 

@@ -9,22 +9,14 @@ interface InputFormProps {
     labelContent: string,
     callbackValueState(value:string): void,
     callbackValidState(isValid: boolean): void,
+    inputValue: string,
+    inputValid: boolean,
 }
 
 const InputForm = (props:InputFormProps) => {
-
-    const [inputValue, setInputValue] = useState('');
-    const [inputValid, setInputValid] = useState(false);
     const [inputError, setInputError] = useState({
         error: 'Поле должно быть заполнено',
     });
-
-
-    function clear() {
-        setInputValue('');
-        setInputValid(false);
-        setInputError({error: 'Поле должно быть заполнено'});
-    }
 
     const phoneRegexp = /\+7\s?[\(]{0,1}9[0-9]{2}[\)][-]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}/;
     const paymentRegexp = /^\d+$/;
@@ -33,36 +25,38 @@ const InputForm = (props:InputFormProps) => {
     function handleUserInput(e : React.ChangeEvent<HTMLInputElement>) {
         const inputName = e.target.name;
         const value = e.target.value;
-        setInputValue(value);
+        props.callbackValueState(value);
         validate(inputName, value);
     }
 
     function validate(inputName: string, value : string) : void{
         const validationError = inputError;
-        let isValidValue = inputValid;
+        let isValidValue = props.inputValid;
         switch (inputName) {
             case 'phone':
-                if(value.length < inputValue.length) {
-                    setInputValue(value);
+                if(value.length < props.inputValue.length ) {
+                    props.callbackValueState(value);
                     props.callbackValidState(false);
                     validationError.error = 'Поле должно быть заполнено';
                 }else {
                     let val = [...value];
                     if(value.length === 7) {
                         val.splice(6, 0, ')', '-');
-                        setInputValue(val.join(''));
+                        props.callbackValueState(val.join(''));
+                        console.log(val.join(''), value)
                     }
                     if(value.length === 12) {
                         val.splice(11, 0, '-');
-                        setInputValue(val.join(''));
+                        props.callbackValueState(val.join(''));
+                        console.log(val)
                     }
                     if(value.length === 15) {
                         val.splice(14, 0, '-');
-                        setInputValue(val.join(''));
+                        props.callbackValueState(val.join(''));
                     }
                     if(value.length >= 17) {
                         const blockedValue = value.slice(0, 17);
-                        setInputValue(blockedValue);
+                        props.callbackValueState(blockedValue);
                     }
                 }
                 if(phoneRegexp.test(value)) {
@@ -78,6 +72,7 @@ const InputForm = (props:InputFormProps) => {
                 break;
             case 'payment':
                 if(value === '') {
+                    props.callbackValueState(value);
                     isValidValue = false;
                     validationError.error = 'Введите сумму в заданных границах (от 1р до 1000р)';
                 } else if (paymentRegexp.test(value)) {
@@ -97,15 +92,13 @@ const InputForm = (props:InputFormProps) => {
             default:
                 break;
         }
-        setInputValid(isValidValue);
         setInputError(validationError);
-        props.callbackValueState(value);
         props.callbackValidState(isValidValue);
     }
 
     function passFirstValue() : void {
-        if(inputValue.length === 0 && props.name === 'phone') {
-            setInputValue('+7(');
+        if(props.inputValue?.length === 0 && props.name === 'phone') {
+            props.callbackValueState('+7(');
         }
     }
 
@@ -113,11 +106,11 @@ const InputForm = (props:InputFormProps) => {
         <InputBlock>
             <Label htmlFor={props.name}>{props.labelContent}:</Label>
             <Input
-                valid={inputValid}
+                valid={props.inputValid}
                 id={props.id}
                 name={props.name}
                 type={props.type}
-                value={inputValue}
+                value={props.inputValue}
                 placeholder={props.placeholder}
                 onChange={(e:React.ChangeEvent<HTMLInputElement>) => {handleUserInput(e)}}
                 onClick={()=> {passFirstValue()}}

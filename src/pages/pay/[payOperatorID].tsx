@@ -1,4 +1,5 @@
-import React, {useEffect, useState, useContext} from 'react';
+import {SETTINGS} from '../../SETTINGS';
+import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {NextPageContext} from 'next';
 import {
@@ -33,8 +34,8 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
         message:''
     })
     const [popupFlag, setPopupFlag] = useState(false);
-    const [dropInputs, setDropInputs] = useState(false)
 
+    console.log(phone)
 
     useEffect(()=> {
         if(validPhone && validPayment) {
@@ -42,11 +43,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
         } else {
             setIsValidForm(false);
         }
-    })
-
-    function useCallback(callback:()=> void) {
-        callback()
-    }
+    });
 
     async function sendData(e: React.FormEvent){
         e.preventDefault();
@@ -63,7 +60,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
             message: 'Обработка платежа...'
         })
         const req = await fetch(
-            `http://localhost:3000/api/pay`, {
+            `http://${SETTINGS.URL}/api/pay`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -103,7 +100,8 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
                         labelContent={"Номер телефона"}
                         callbackValueState={setPhone}
                         callbackValidState={setIsValidPhone}
-                        clear={dropInputs}
+                        inputValid={validPhone}
+                        inputValue={phone}
                     />
                     <InputForm
                         id={"payment"}
@@ -113,6 +111,8 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
                         labelContent={"Сумма платежа"}
                         callbackValueState={setPayment}
                         callbackValidState={setIsValidPayment}
+                        inputValid={validPayment}
+                        inputValue={payment}
                     />
                     <SubmitButton disabled={!validForm} onClick={(e)=> {sendData(e)}}>Оплатить</SubmitButton>
                 </PaymentForm>
@@ -139,7 +139,7 @@ interface OperatorData {
 }
 
 PaymentPage.getInitialProps = async (ctx: NextPageContext) => {
-    const res = await fetch(`http://localhost:3000/api/operators/${ctx.query.payOperatorID}`);
+    const res = await fetch(`http://${SETTINGS.URL}/api/operators/${ctx.query.payOperatorID}`);
     const data : OperatorData | undefined = await res.json();
     return { operatorData: data }
 }
