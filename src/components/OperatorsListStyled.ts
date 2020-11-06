@@ -1,23 +1,29 @@
 import styled from 'styled-components';
+import {Scrollbars} from 'react-custom-scrollbars'
 
 export const TileContainer = styled.div`
-    width: 980px;
     display: flex;
-    align-content: flex-start;
     flex-wrap: wrap;
+    padding: 15px;
 `;
 
-export const Input = styled.input`
-    width: 200px;
-    padding: 10px 25px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    text-align:center;
-`;
-
-export const InputBlock = styled.div`
+export const Scrollbar = styled(Scrollbars)`
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 `;
+
+export const ScrollBarContainer = styled.div`
+    width:980px;
+
+    @media screen and (max-width: 991px) {
+        width: 660px;
+    }
+    @media screen and (max-width: 991px) {
+        width: 660px;
+    }
+    @media screen and (max-width: 660px) {
+        width: 100%;
+    }
+`;
+
 

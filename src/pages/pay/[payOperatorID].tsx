@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {useRouter} from "next/router";
 import {NextPageContext} from 'next';
 import {
+    FormHeader,
     PaymentContainer,
-    InputBlock,
-    ErrorMessage,
-    Input,
+    PaymentForm,
+    SubmitButton,
 } from '../../components/PaymentPageStyled';
 import InputForm from "../../components/inputFormComponent/InputForm";
+import Popup from "../../components/popupComponent/Popup";
 
 interface PaymentProps {
     operatorData: OperatorData | undefined
@@ -31,6 +32,8 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
         result: false,
         message:''
     })
+    const [popupFlag, setPopupFlag] = useState(false);
+    const [dropInputs, setDropInputs] = useState(false)
 
 
     useEffect(()=> {
@@ -39,10 +42,11 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
         } else {
             setIsValidForm(false);
         }
-        console.log(validForm, validPhone, validPayment)
     })
 
-    //сделать useEffect и обновлять кнопку формы
+    function useCallback(callback:()=> void) {
+        callback()
+    }
 
     async function sendData(e: React.FormEvent){
         e.preventDefault();
@@ -53,7 +57,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
             payment: payment,
             operatorName: operatorData?.data.operatorName
         }
-        console.log(reqBody)
+        setPopupFlag(true);
         setResponseData({
             result: false,
             message: 'Обработка платежа...'
@@ -69,9 +73,9 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
         const res = await req.json();
         setResponseData(res);
         setTimeout(() => {
-            redirect(res.result)
-        }, 1000);
-        return res
+            setPopupFlag(false);
+            redirect(res.result);
+        }, 2000);
     }
 
     function redirect(result : object) {
@@ -89,27 +93,33 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
     if (operatorData && operatorData.data.id) {
         return (
             <PaymentContainer>
-                <form>
-                    <h1>Оплата {operatorData.data.operatorName}</h1>
+                <PaymentForm>
+                    <FormHeader>Оплата {operatorData.data.operatorName}</FormHeader>
                     <InputForm
                         id={"phone"}
                         name={"phone"}
                         type={"tel"}
                         placeholder={"+7(999)-999-99-99"}
+                        labelContent={"Номер телефона"}
                         callbackValueState={setPhone}
                         callbackValidState={setIsValidPhone}
+                        clear={dropInputs}
                     />
                     <InputForm
                         id={"payment"}
                         name={"payment"}
                         type={"text"}
                         placeholder={"Введите сумму"}
+                        labelContent={"Сумма платежа"}
                         callbackValueState={setPayment}
                         callbackValidState={setIsValidPayment}
                     />
-                    <input disabled={!validForm} type="submit" value="Отправить" onClick={(e)=> {sendData(e)}}/>
-                </form>
-                <div>{responseData.message}</div>
+                    <SubmitButton disabled={!validForm} onClick={(e)=> {sendData(e)}}>Оплатить</SubmitButton>
+                </PaymentForm>
+                <Popup
+                    popupFlag={popupFlag}
+                    message={responseData.message}
+                />
             </PaymentContainer>
         )
     } else {
@@ -117,7 +127,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
     }
 }
 
-export interface OperatorData {
+interface OperatorData {
     data: {
         id: string,
         operatorName: string,

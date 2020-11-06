@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components'
+import styled from 'styled-components'
 
     export const OperatorImg = styled.img`
         width: 150px;
@@ -12,6 +12,10 @@ import styled, { css, keyframes } from 'styled-components'
         text-align: center;
         font-weight: bold;
         transition: 1s;
+        
+        @media all and (max-width: 479px) {
+        font-size: 28px;
+        }
     `;
 
     export const Tile = styled.div`
@@ -28,13 +32,18 @@ import styled, { css, keyframes } from 'styled-components'
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         transition: all 0.15s cubic-bezier(.25,.8,.25,1);
         
+        @media screen and (max-width: 660px) {
+            width: 100%;
+            height: 120px;
+        }
+        
         &:hover {
             box-shadow: 0 8px 20px rgba(0,0,0,0.18), 0 6px 5px rgba(0,0,0,0.15);
         }
         &:hover ${OperatorImg} {
-            transform: scale(1.05,1.05);
+            transform: scale(1.1, 1.1);
         }
         &:hover ${OperatorName} {
-            transform: scale(1.05,1.05);
+            transform: scale(1.1, 1.1);
         }
     `;

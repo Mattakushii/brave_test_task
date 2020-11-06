@@ -1,39 +1,69 @@
 import styled from 'styled-components'
 
-interface TitleProps {
-    readonly valid  : boolean;
-};
-
 export const PaymentContainer = styled.div`
-        width: 980px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
+    width: 980px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    @media screen and (max-width: 991px) {
+        width: 760px;
+    }
+    
+    @media screen and (max-width: 767px){
+        width: 470px;
+    }
+    
+    @media screen and (max-width: 479px){
+        width: 320px;
+    }
+    
 `;
 
-export const InputBlock = styled.div`
-        display: flex;
-        flex-direction: column;
+export const PaymentForm = styled.form`
+    width: 760px;
+    display: flex;
+    flex-direction: column;
+    
+    @media screen and (max-width: 767px){
+        width: 470px;
+    }
+    
+    @media screen and (max-width: 479px){
+        width: 310px;
+    }
 `;
 
-export const Input = styled.input<TitleProps>`
-    width: 200px;
-    padding: 10px 25px;
-    font-size: 18px;
+export const FormHeader = styled.div`
+    width: 100%;
+    height: 35px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+`;
+
+export const SubmitButton = styled.button`
+    width: 160px;
+    height: 40px;
+    align-self: center;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
     border: none;
-    outline: none;
+    background-color: #000000;
+    color: #FFFFFF;
     border-radius: 5px;
-    transition: 0.5s;
-    color: ${props => props.valid ? "#000000" : "#D30000"};
-    box-shadow: ${props => props.valid ? "none": "inset 0 0 5px rgba(211,0,0,0.5)"}
+    transition: all 1s cubic-bezier(.25,.8,.25,1);
+    
+    &:disabled {
+        background-color: #404040;
+        color: #9e9e9e;
+    }
 `;
 
 export const ErrorMessage = styled.div` 
-    width: 500px;
     height: 25px;
     color: #D30000;
-`;
-
-export const ResultContainer = styled.div`
-    
 `;

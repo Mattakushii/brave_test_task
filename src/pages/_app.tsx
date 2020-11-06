@@ -1,24 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Head from 'next/head'
 import Header from "../components/headerComponent/Header";
 import Footer from "../components/footerComponent/Footer";
-
 import { createGlobalStyle } from 'styled-components';
-import { AppContainer, MainContainer} from '../components/CustomAppStyled';
+import { AppContainer, MainContainer, BackgroundPopup} from '../components/CustomAppStyled';
+import {Context} from '../Context'
 
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: Roboto, sans-serif;
   }
 `
 
 
 function App ({ Component, pageProps }: any) {
+    const [visible, setVisible] = useState(false)
 
+    function switchBackground(): void {
+        setVisible(!visible)
+    }
 
     return (
         <>
@@ -30,13 +33,18 @@ function App ({ Component, pageProps }: any) {
                 <title>Brave developers terminal</title>
             </Head>
             <GlobalStyle/>
-            <AppContainer>
-                <Header/>
-                <MainContainer>
-                    <Component {...pageProps} />
-                </MainContainer>
-                <Footer/>
-            </AppContainer>
+            <BackgroundPopup visible={visible}/>
+            <Context.Provider value={{
+                switchBackground
+            }}>
+                <AppContainer>
+                    <Header/>
+                    <MainContainer>
+                        <Component {...pageProps} />
+                    </MainContainer>
+                    <Footer/>
+                </AppContainer>
+            </Context.Provider>
         </>
     )
 }

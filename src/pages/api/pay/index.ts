@@ -11,14 +11,14 @@ export default function payHandler(req : NextApiRequest, res: NextApiResponse) {
                             result: true,
                             message: `Успешно!`
                         });
-                    }, 1000);
+                    }, 2000);
                 } else {
                     setTimeout(() => {
                         res.status(404).json({
                             result: false,
                             message: `Кажется, что то пошло не так..(`
                         });
-                    }, 1000)
+                    }, 2000)
                 }
             } else {
                 res.status(404).json({

@@ -1,21 +1,30 @@
-import React, {useState} from "react";
-import {InputBlock, Input, ErrorMessage} from "./InputFormStyled";
+import React, {useEffect, useState} from "react";
+import {InputBlock, Input, ErrorMessage, Label} from "./InputFormStyled";
 
-export interface InputFormProps {
+interface InputFormProps {
     id: string,
     name: string,
     type: string,
     placeholder: string,
+    labelContent: string,
     callbackValueState(value:string): void,
     callbackValidState(isValid: boolean): void,
 }
 
 const InputForm = (props:InputFormProps) => {
+
     const [inputValue, setInputValue] = useState('');
     const [inputValid, setInputValid] = useState(false);
     const [inputError, setInputError] = useState({
         error: 'Поле должно быть заполнено',
     });
+
+
+    function clear() {
+        setInputValue('');
+        setInputValid(false);
+        setInputError({error: 'Поле должно быть заполнено'});
+    }
 
     const phoneRegexp = /\+7\s?[\(]{0,1}9[0-9]{2}[\)][-]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}/;
     const paymentRegexp = /^\d+$/;
@@ -29,31 +38,31 @@ const InputForm = (props:InputFormProps) => {
     }
 
     function validate(inputName: string, value : string) : void{
-        const validationError : any = inputError
-        let isValidValue : boolean = inputValid;
+        const validationError = inputError;
+        let isValidValue = inputValid;
         switch (inputName) {
             case 'phone':
                 if(value.length < inputValue.length) {
                     setInputValue(value);
                     props.callbackValidState(false);
-                    validationError.error = 'Поле должно быть заполено';
+                    validationError.error = 'Поле должно быть заполнено';
                 }else {
                     let val = [...value];
                     if(value.length === 7) {
                         val.splice(6, 0, ')', '-');
-                        setInputValue(val.join(''))
+                        setInputValue(val.join(''));
                     }
                     if(value.length === 12) {
                         val.splice(11, 0, '-');
-                        setInputValue(val.join(''))
+                        setInputValue(val.join(''));
                     }
                     if(value.length === 15) {
                         val.splice(14, 0, '-');
-                        setInputValue(val.join(''))
+                        setInputValue(val.join(''));
                     }
                     if(value.length >= 17) {
-                        const blockedValue = value.slice(0, 17)
-                        setInputValue(blockedValue)
+                        const blockedValue = value.slice(0, 17);
+                        setInputValue(blockedValue);
                     }
                 }
                 if(phoneRegexp.test(value)) {
@@ -61,29 +70,28 @@ const InputForm = (props:InputFormProps) => {
                     validationError.error = ''
                 } else if(value.match(letterRegexp)){
                     isValidValue = false;
-                    validationError.error = 'Поле должно содержать только цифры'
+                    validationError.error = 'Поле содержит недопустимые символы';
                 } else{
                     isValidValue= false;
-                    validationError.error = 'Поле должно быть заполено'
+                    validationError.error = 'Поле должно быть заполено';
                 }
-                console.log(isValidValue, inputValue, validationError)
                 break;
             case 'payment':
                 if(value === '') {
                     isValidValue = false;
-                    validationError.error = 'Введите сумму в заданных границах (от 1р до 1000р)'
+                    validationError.error = 'Введите сумму в заданных границах (от 1р до 1000р)';
                 } else if (paymentRegexp.test(value)) {
                     const val = parseInt(value);
                     if (val >= 1 && val <= 1000) {
                         isValidValue = true;
-                        validationError.error = ''
+                        validationError.error = '';
                     } else {
                         isValidValue = false;
-                        validationError.error = 'Введите сумму в заданных границах (от 1р до 1000р)'
+                        validationError.error = 'Введите сумму в заданных границах (от 1р до 1000р)';
                     }
                 } else {
                     isValidValue = false;
-                    validationError.error = 'Поле содержит недопустимые символы'
+                    validationError.error = 'Поле содержит недопустимые символы';
                 }
                 break;
             default:
@@ -92,7 +100,7 @@ const InputForm = (props:InputFormProps) => {
         setInputValid(isValidValue);
         setInputError(validationError);
         props.callbackValueState(value);
-        props.callbackValidState(isValidValue)
+        props.callbackValidState(isValidValue);
     }
 
     function passFirstValue() : void {
@@ -101,12 +109,11 @@ const InputForm = (props:InputFormProps) => {
         }
     }
 
-
-
     return(
         <InputBlock>
-            <label htmlFor={props.name}/>
+            <Label htmlFor={props.name}>{props.labelContent}:</Label>
             <Input
+                valid={inputValid}
                 id={props.id}
                 name={props.name}
                 type={props.type}

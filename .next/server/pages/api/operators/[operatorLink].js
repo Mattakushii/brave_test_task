@@ -97,10 +97,10 @@ module.exports =
 /*!************************!*\
   !*** ./public/db.json ***!
   \************************/
-/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, default */
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("[{\"id\":\"1\",\"operatorName\":\"Megafon\",\"operatorLink\":\"megafon\",\"imgUrl\":\"logos/megafon.png\"},{\"id\":\"2\",\"operatorName\":\"Beeline\",\"operatorLink\":\"beeline\",\"imgUrl\":\"/logos/beeline.png\"},{\"id\":\"3\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\",\"imgUrl\":\"/logos/mts.png\"},{\"id\":\"4\",\"operatorName\":\"Yota\",\"operatorLink\":\"yota\"},{\"id\":\"5\",\"operatorName\":\"СберМобайл\",\"operatorLink\":\"sbermobile\"},{\"id\":\"6\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\"},{\"id\":\"7\",\"operatorName\":\"Tele2\",\"operatorLink\":\"tele2\"},{\"id\":\"8\",\"operatorName\":\"Beeline\",\"operatorLink\":\"beeline\"},{\"id\":\"9\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\"},{\"id\":\"10\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\"}]");
+module.exports = JSON.parse("[{\"id\":\"1\",\"operatorName\":\"Megafon\",\"operatorLink\":\"megafon\",\"imgUrl\":\"logos/megafon.png\"},{\"id\":\"2\",\"operatorName\":\"Beeline\",\"operatorLink\":\"beeline\",\"imgUrl\":\"/logos/beeline.png\"},{\"id\":\"3\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\",\"imgUrl\":\"/logos/mts.png\"},{\"id\":\"4\",\"operatorName\":\"Yota\",\"operatorLink\":\"yota\"},{\"id\":\"5\",\"operatorName\":\"СберМобайл\",\"operatorLink\":\"sbermobile\"},{\"id\":\"6\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\"},{\"id\":\"7\",\"operatorName\":\"Tele2\",\"operatorLink\":\"tele2\"},{\"id\":\"8\",\"operatorName\":\"Beeline\",\"operatorLink\":\"beeline\"},{\"id\":\"9\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\"},{\"id\":\"10\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\"},{\"id\":\"11\",\"operatorName\":\"Mts\",\"operatorLink\":\"mts\"}]");
 
 /***/ }),
 

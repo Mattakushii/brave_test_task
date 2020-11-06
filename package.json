@@ -25,9 +25,11 @@
   },
   "homepage": "https://github.com/Mattakushii/brave_test_task#readme",
   "dependencies": {
+    "@types/react-custom-scrollbars": "^4.0.7",
     "@types/styled-components": "^5.1.4",
     "next": "^9.5.5",
     "react": "^16.14.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.14.0",
     "styled-components": "^5.2.0"
   },

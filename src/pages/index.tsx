@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { TileContainer } from "../components/OperatorsListStyled";
+import React, { useState } from 'react';
+import { TileContainer, ScrollBarContainer, Scrollbar } from "../components/OperatorsListStyled";
 import OperatorTile from "../components/operatorTileComponent/OperatorTile";
 
 interface MainPageProps {
@@ -10,21 +10,25 @@ const MainPage = ({data} : MainPageProps) => {
     const [operatorsList, setOperatorsList] = useState(data);
 
     return (
-            <TileContainer>
+        <ScrollBarContainer>
+            <Scrollbar universal>
+                <TileContainer>
                 {
-                operatorsList?.map((operator : OperatorsList, index: number)=> {
-                    return (
-                        <OperatorTile
-                            key={index}
-                            id={operator.id}
-                            name={operator.operatorName}
-                            link={operator.operatorLink}
-                            imgUrl={operator.imgUrl}
-                        />
-                    )
-                })
+                    operatorsList?.map((operator : OperatorsList, index: number)=> {
+                        return (
+                            <OperatorTile
+                                key={index}
+                                id={operator.id}
+                                name={operator.operatorName}
+                                link={operator.operatorLink}
+                                imgUrl={operator.imgUrl}
+                            />
+                        )
+                    })
                 }
-        </TileContainer>
+                </TileContainer>
+            </Scrollbar>
+        </ScrollBarContainer>
     )
 }
 
