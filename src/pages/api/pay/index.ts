@@ -6,6 +6,7 @@ export default function payHandler(req : NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
         case 'OPTIONS':
             res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
+            res.setHeader('Access-Control-Allow-Methods', 'POST');
             break;
         case 'POST':
             if(req.body.phoneNumber && req.body.payment && req.body.operatorName) {
