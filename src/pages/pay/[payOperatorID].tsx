@@ -63,8 +63,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
             `${PAGE_URL}/api/pay`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'https://brave-test-task.vercel.app'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(reqBody)
             });
