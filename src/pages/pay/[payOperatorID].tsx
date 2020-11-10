@@ -64,7 +64,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Origin': 'https://brave-test-task.vercel.app'
                 },
                 body: JSON.stringify(reqBody)
             });
