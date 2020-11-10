@@ -64,7 +64,6 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'referrer': "",
                 },
                 body: JSON.stringify(reqBody)
             });
