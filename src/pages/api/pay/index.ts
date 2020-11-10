@@ -4,6 +4,9 @@ export default function payHandler(req : NextApiRequest, res: NextApiResponse) {
     console.log(req.method);
     res.setHeader('Access-Control-Allow-Origin', '*');
     switch (req.method) {
+        case 'OPTIONS':
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
+            break;
         case 'POST':
             if(req.body.phoneNumber && req.body.payment && req.body.operatorName) {
                 const randRes =  randomInteger(0, 1);
