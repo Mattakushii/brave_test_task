@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default function payHandler(req : NextApiRequest, res: NextApiResponse) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
     switch (req.method) {
         case 'POST':
+            res.setHeader('Access-Control-Allow-Origin', '*');
             if(req.body.phoneNumber && req.body.payment && req.body.operatorName) {
                 const randRes =  randomInteger(0, 1);
                 if(randRes) {
@@ -29,6 +29,7 @@ export default function payHandler(req : NextApiRequest, res: NextApiResponse) {
             }
             break;
         default: {
+            res.setHeader('Access-Control-Allow-Origin', '*');
             res.status(405).json({
                 result: false,
                 message: `${req.method} not allowed`});
