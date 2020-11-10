@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default function payHandler(req : NextApiRequest, res: NextApiResponse) {
-    res.setHeader('allow-cross-origin-header', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     switch (req.method) {
         case 'POST':
             if(req.body.phoneNumber && req.body.payment && req.body.operatorName) {
