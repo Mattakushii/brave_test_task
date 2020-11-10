@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 export default function payHandler(req : NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
         case 'POST':
-            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Origin', 'https://brave-test-task.vercel.app');
             if(req.body.phoneNumber && req.body.payment && req.body.operatorName) {
                 const randRes =  randomInteger(0, 1);
                 if(randRes) {
