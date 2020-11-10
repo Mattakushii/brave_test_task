@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const SETTINGS = {\n  URL: '192.168.0.4:3000'\n};","map":{"version":3,"sources":["C:/GitHub/brave_test_task/src/SETTINGS.js"],"names":["SETTINGS","URL"],"mappings":"AAAA,OAAO,MAAMA,QAAQ,GAAG;AACpBC,EAAAA,GAAG,EAAE;AADe,CAAjB","sourcesContent":["export const SETTINGS = {\r\n    URL: '192.168.0.4:3000'\r\n}"]},"metadata":{},"sourceType":"module"}
