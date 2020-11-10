@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 export default function personHandler({ query: { operatorLink } }: NextApiRequest, res: NextApiResponse) {
   const filtered = db.filter((p) => p.operatorLink === operatorLink)
-
+  res.setHeader('allow-cross-origin-header', '*');
   if (filtered.length > 0) {
     setTimeout(()=> {
       res.status(200).json({
