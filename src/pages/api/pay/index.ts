@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default function payHandler(req : NextApiRequest, res: NextApiResponse) {
+    res.setHeader('Content-Type', 'application/json');
     switch (req.method) {
         case 'POST':
             if(req.body.phoneNumber && req.body.payment && req.body.operatorName) {
