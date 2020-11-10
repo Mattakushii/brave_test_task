@@ -1,4 +1,3 @@
-import {SETTINGS} from '../../SETTINGS';
 import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {NextPageContext} from 'next';
@@ -10,6 +9,7 @@ import {
 } from '../../components/PaymentPageStyled';
 import InputForm from "../../components/inputFormComponent/InputForm";
 import Popup from "../../components/popupComponent/Popup";
+import { PAGE_URL } from "../../../public/CONSTANTS"
 
 interface PaymentProps {
     operatorData: OperatorData | undefined
@@ -60,7 +60,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
             message: 'Обработка платежа...'
         })
         const req = await fetch(
-            `http://${SETTINGS.URL}/api/pay`, {
+            `${PAGE_URL}/api/pay`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ interface OperatorData {
 }
 
 PaymentPage.getInitialProps = async (ctx: NextPageContext) => {
-    const res = await fetch(`http://${SETTINGS.URL}/api/operators/${ctx.query.payOperatorID}`);
+    const res = await fetch(`${PAGE_URL}/api/operators/${ctx.query.payOperatorID}`);
     const data : OperatorData | undefined = await res.json();
     return { operatorData: data }
 }

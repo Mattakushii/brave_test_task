@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import {SETTINGS} from '../SETTINGS';
 import { TileContainer, ScrollBarContainer, Scrollbar } from "../components/OperatorsListStyled";
 import OperatorTile from "../components/operatorTileComponent/OperatorTile";
+import { PAGE_URL } from "../../public/CONSTANTS"
+import { GetStaticProps } from 'next';
 
 interface MainPageProps {
     data: OperatorsList[] | undefined
@@ -9,7 +10,6 @@ interface MainPageProps {
 
 const MainPage = ({data} : MainPageProps) => {
     const [operatorsList, setOperatorsList] = useState(data);
-
     return (
         <ScrollBarContainer>
             <Scrollbar universal>
@@ -40,10 +40,10 @@ export interface OperatorsList {
     imgUrl?: string
 }
 
-MainPage.getInitialProps = async () => {
-    const res = await fetch(`http://${SETTINGS.URL}/api/operators`);
+export const getStaticProps : GetStaticProps = async ctx => {
+    const res = await fetch(`${PAGE_URL}/api/operators`);
     const data : Array<OperatorsList> | undefined  = await  res.json();
-    return {data: data}
+    return {props : {data}};
 }
 
 export default MainPage
