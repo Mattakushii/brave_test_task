@@ -35,8 +35,6 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
     })
     const [popupFlag, setPopupFlag] = useState(false);
 
-    console.log(phone)
-
     useEffect(()=> {
         if(validPhone && validPayment) {
             setIsValidForm(true);
@@ -47,26 +45,12 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
 
     async function sendData(e: React.FormEvent){
         e.preventDefault();
-        const phoneArr : RegExpMatchArray | null = phone.match(/\d/g);
-        const validPhone = phoneArr?.join('');
-        const reqBody : SendingData = {
-            phoneNumber: validPhone,
-            payment: payment,
-            operatorName: operatorData?.data.operatorName
-        }
         setPopupFlag(true);
         setResponseData({
             result: false,
             message: 'Обработка платежа...'
         })
-        const req = await fetch(
-            `${PAGE_URL}/api/pay`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(reqBody)
-            });
+        const req = await fetch(`${PAGE_URL}/api/pay`);
         const res = await req.json();
         setResponseData(res);
         setTimeout(() => {
