@@ -5,13 +5,16 @@ interface TitleProps {
 };
 
 export const InputBlock = styled.div`
-        display: flex;
-        flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `;
 
 export const Label = styled.label`
     font-size: 18px;
     font-weight: 500;
+    width: 250px;
+    height: 19px;
+    overflow: hidden;
 `;
 
 export const Input = styled.input<TitleProps>`

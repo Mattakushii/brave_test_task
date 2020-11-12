@@ -17,6 +17,10 @@ export const HeaderLogo = styled.div`
     font-size: 20px;
     margin-left: 25px;
     cursor: pointer;
+    height: 24px;
+    text-align: center;
+    width: 240px;
+    overflow: hidden;
     
     @media screen and (max-width: 767px) {
         margin: 0;
