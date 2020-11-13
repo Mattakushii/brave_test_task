@@ -15,12 +15,6 @@ interface PaymentProps {
     operatorData: OperatorData | undefined
 }
 
-interface SendingData {
-    phoneNumber: string | undefined,
-    payment: string,
-    operatorName: string | undefined
-}
-
 const PaymentPage = ({operatorData}: PaymentProps) => {
     const router = useRouter();
 
@@ -41,7 +35,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
         } else {
             setIsValidForm(false);
         }
-    });
+    }, [validPhone, validPayment]);
 
     async function sendData(e: React.FormEvent){
         e.preventDefault();
@@ -63,9 +57,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
         if(result) {
             router.replace('/');
         } else {
-            setPhone('');
             setIsValidPhone(false);
-            setPayment('');
             setIsValidPayment(false);
             setIsValidForm(false);
         }

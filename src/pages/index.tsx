@@ -15,10 +15,10 @@ const MainPage = ({data} : MainPageProps) => {
             <Scrollbar universal>
                 <TileContainer>
                 {
-                    operatorsList?.map((operator : OperatorsList, index: number)=> {
+                    operatorsList?.map((operator : OperatorsList)=> {
                         return (
                             <OperatorTile
-                                key={index}
+                                key={operator.id}
                                 id={operator.id}
                                 name={operator.operatorName}
                                 link={operator.operatorLink}

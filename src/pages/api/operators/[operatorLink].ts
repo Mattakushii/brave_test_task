@@ -2,12 +2,13 @@ import db from "../../../../public/db.json";
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default function personHandler({ query: { operatorLink } }: NextApiRequest, res: NextApiResponse) {
-  const filtered = db.filter((p) => p.operatorLink === operatorLink)
   res.setHeader('Access-Control-Allow-Origin', '*');
-  if (filtered.length > 0) {
+  
+  const filtered = db.find((p) => p.operatorLink === operatorLink)
+  if (filtered) {
     setTimeout(()=> {
       res.status(200).json({
-        data: filtered[0],
+        data: filtered,
         errMessage: '',
         ok: true
       })

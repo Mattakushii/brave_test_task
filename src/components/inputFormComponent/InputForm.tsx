@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import {InputBlock, Input, ErrorMessage, Label} from "./InputFormStyled";
 
 interface InputFormProps {
@@ -15,14 +15,14 @@ interface InputFormProps {
 
 const InputForm = (props:InputFormProps) => {
     const [inputError, setInputError] = useState({
-        error: 'Поле должно быть заполнено',
+        error: '',
     });
 
     const phoneRegexp = /\+7\s?[\(]{0,1}9[0-9]{2}[\)][-]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}/;
     const paymentRegexp = /^\d+$/;
-    const letterRegexp = /[а-яА-ЯёЁa-zA-Z]+$/;
+    const letterRegexp = /[а-яА-ЯёЁa-zA-Z]/g;
 
-    function handleUserInput(e : React.ChangeEvent<HTMLInputElement>) {
+    function handleUserInput(e : React.ChangeEvent<HTMLInputElement>) : void {
         const inputName = e.target.name;
         const value = e.target.value;
         props.callbackValueState(value);
@@ -38,17 +38,15 @@ const InputForm = (props:InputFormProps) => {
                     props.callbackValueState(value);
                     props.callbackValidState(false);
                     validationError.error = 'Поле должно быть заполнено';
-                }else {
+                } else {
                     let val = [...value];
                     if(value.length === 7) {
                         val.splice(6, 0, ')', '-');
                         props.callbackValueState(val.join(''));
-                        console.log(val.join(''), value)
                     }
                     if(value.length === 12) {
                         val.splice(11, 0, '-');
                         props.callbackValueState(val.join(''));
-                        console.log(val)
                     }
                     if(value.length === 15) {
                         val.splice(14, 0, '-');
@@ -59,13 +57,13 @@ const InputForm = (props:InputFormProps) => {
                         props.callbackValueState(blockedValue);
                     }
                 }
-                if(phoneRegexp.test(value)) {
-                    isValidValue = true;
-                    validationError.error = ''
-                } else if(value.match(letterRegexp)){
+                if(value.match(letterRegexp)) {
                     isValidValue = false;
                     validationError.error = 'Поле содержит недопустимые символы';
-                } else{
+                } else if (phoneRegexp.test(value)) {
+                    isValidValue = true;
+                    validationError.error = ''
+                } else {
                     isValidValue= false;
                     validationError.error = 'Поле должно быть заполено';
                 }
@@ -96,9 +94,18 @@ const InputForm = (props:InputFormProps) => {
         props.callbackValidState(isValidValue);
     }
 
-    function passFirstValue() : void {
-        if(props.inputValue?.length === 0 && props.name === 'phone') {
-            props.callbackValueState('+7(');
+    function checkFirstInput() : void {
+        if(props.inputValue?.length === 0) {
+            if(props.name === 'phone') {
+                props.callbackValueState('+7(');
+                setInputError({
+                    error: 'Поле должно быть заполнено'
+                });
+            } else if(props.name === 'payment') {
+                setInputError({
+                    error: 'Введите сумму в заданных границах (от 1р до 1000р)'
+                });
+            }
         }
     }
 
@@ -113,8 +120,8 @@ const InputForm = (props:InputFormProps) => {
                 value={props.inputValue}
                 placeholder={props.placeholder}
                 onChange={(e:React.ChangeEvent<HTMLInputElement>) => {handleUserInput(e)}}
-                onClick={()=> {passFirstValue()}}
-                onFocus={()=> {passFirstValue()}}
+                onClick={()=> {checkFirstInput()}}
+                onFocus={()=> {checkFirstInput()}}
             />
             <ErrorMessage>{inputError.error}</ErrorMessage>
         </InputBlock>
