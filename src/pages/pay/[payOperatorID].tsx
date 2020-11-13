@@ -10,6 +10,7 @@ import {
 import InputForm from "../../components/inputFormComponent/InputForm";
 import Popup from "../../components/popupComponent/Popup";
 import { PAGE_URL } from "../../../public/CONSTANTS"
+import { InputTypes } from '../../../public/types'
 
 interface PaymentProps {
     operatorData: OperatorData | undefined
@@ -69,8 +70,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
                 <PaymentForm>
                     <FormHeader>Оплата {operatorData.data.operatorName}</FormHeader>
                     <InputForm
-                        id={"phone"}
-                        name={"phone"}
+                        name={InputTypes.phone}
                         type={"tel"}
                         placeholder={"+7(999)-999-99-99"}
                         labelContent={"Номер телефона"}
@@ -80,8 +80,7 @@ const PaymentPage = ({operatorData}: PaymentProps) => {
                         inputValue={phone}
                     />
                     <InputForm
-                        id={"payment"}
-                        name={"payment"}
+                        name={InputTypes.payment}
                         type={"text"}
                         placeholder={"Введите сумму"}
                         labelContent={"Сумма платежа"}

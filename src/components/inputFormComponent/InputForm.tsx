@@ -1,8 +1,8 @@
 import React, { useState} from "react";
 import {InputBlock, Input, ErrorMessage, Label} from "./InputFormStyled";
+import { InputTypes } from '../../../public/types'
 
 interface InputFormProps {
-    id: string,
     name: string,
     type: string,
     placeholder: string,
@@ -18,22 +18,22 @@ const InputForm = (props:InputFormProps) => {
         error: '',
     });
 
+
     const phoneRegexp = /\+7\s?[\(]{0,1}9[0-9]{2}[\)][-]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}/;
     const paymentRegexp = /^\d+$/;
     const letterRegexp = /[а-яА-ЯёЁa-zA-Z]/g;
 
     function handleUserInput(e : React.ChangeEvent<HTMLInputElement>) : void {
-        const inputName = e.target.name;
         const value = e.target.value;
         props.callbackValueState(value);
-        validate(inputName, value);
+        validate(props.name, value);
     }
 
     function validate(inputName: string, value : string) : void{
         const validationError = inputError;
         let isValidValue = props.inputValid;
         switch (inputName) {
-            case 'phone':
+            case InputTypes.phone:
                 if(value.length < props.inputValue.length ) {
                     props.callbackValueState(value);
                     props.callbackValidState(false);
@@ -68,7 +68,7 @@ const InputForm = (props:InputFormProps) => {
                     validationError.error = 'Поле должно быть заполено';
                 }
                 break;
-            case 'payment':
+            case InputTypes.payment:
                 if(value === '') {
                     props.callbackValueState(value);
                     isValidValue = false;
@@ -96,12 +96,12 @@ const InputForm = (props:InputFormProps) => {
 
     function checkFirstInput() : void {
         if(props.inputValue?.length === 0) {
-            if(props.name === 'phone') {
+            if(props.name === InputTypes.phone) {
                 props.callbackValueState('+7(');
                 setInputError({
                     error: 'Поле должно быть заполнено'
                 });
-            } else if(props.name === 'payment') {
+            } else if(props.name === InputTypes.payment) {
                 setInputError({
                     error: 'Введите сумму в заданных границах (от 1р до 1000р)'
                 });
@@ -114,7 +114,6 @@ const InputForm = (props:InputFormProps) => {
             <Label htmlFor={props.name}>{props.labelContent}:</Label>
             <Input
                 valid={props.inputValid}
-                id={props.id}
                 name={props.name}
                 type={props.type}
                 value={props.inputValue}
